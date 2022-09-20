@@ -1,50 +1,13 @@
-Feature: EPUB 3 — Vocabularies
+Feature: EPUB 3 — Vocabularies — Meta properties vocabulary
 
 
-  Checks conformance to the "Vocabularies" section of the EPUB 3.3 specification:
-    https://www.w3.org/TR/epub-33/#app-vocabs
+  Checks conformance to the "Meta properties vocabulary" section of the EPUB 3.3 specification:
+    https://www.w3.org/TR/epub-33/#app-meta-property-vocab
 
 
   Background: 
     Given EPUB test files located at '/epub3/D-vocabularies/files/'
     And EPUBCheck with default settings
-
-  # D.1 Vocabulary association mechanisms
-
-  Scenario: the 'prefix' attribute can be used to define new prefix mappings 
-    When checking file 'property-prefix-declaration-valid.opf'
-    Then no errors or warnings are reported
-
-  Scenario: reserved prefixes can be explicitly declared
-    When checking file 'property-prefix-declaration-reserved-explicit-valid.opf'
-    Then no errors or warnings are reported
-
-  Scenario: syntax errors in the 'prefix' attribute are reported
-    When checking file 'property-prefix-declaration-syntax-error.opf'
-    Then error OPF-004c is reported 2 times (the test file contains 2 syntax errors)
-    And no other errors or warnings are reported
-
-  Scenario: reserved prefixes should not be overridden to other vocabularies 
-    When checking file 'property-prefix-declaration-reserved-overridden-warning.opf'
-    Then warning OPF-007 is reported 8 times (once for each reserved prefix)
-    And no other errors or warnings are reported
-
-  Scenario: default vocabularies must not be assigned a prefix
-  	Note: This should be an error, but is currently reported as a warning
-  	See issue 522: https://github.com/w3c/epubcheck/issues/522
-    When checking file 'property-prefix-declaration-default-vocabs-error.opf'
-    Then warning OPF-007b is reported 4 times (once for each default vocabulary)
-    And no other errors or warnings are reported
-
-  Scenario: A metadata property with an unknown prefix is reported
-    When checking file 'property-prefix-declaration-missing-error.opf'
-    Then error OPF-028 is reported
-    And no errors or warnings are reported
-
-  Scenario: The 'schema' prefix can be used in metadata properties without being declared
-    When checking file 'property-prefix-schema-not-declared-valid.opf'
-    Then no errors or warnings are reported
-
 
   # D.3 Meta properties vocabulary
 
@@ -220,100 +183,4 @@ Feature: EPUB 3 — Vocabularies
     When checking file 'metadata-meta-title-type-cardinality-error.opf'
     Then error RSC-005 is reported
     And the message contains '"title-type" cannot be declared more than once'
-    And no other errors or warnings are reported
-  
-  # D. Metadata Link Vocabulary
-  
-  Scenario: the link 'rel' attribute can have multiple properties
-    When checking file 'link-rel-multiple-properties-valid.opf'
-    Then no errors or warnings are reported
-    
-  Scenario: an 'acquire' link can identify the full version of the publication
-    When checking file 'link-rel-acquire-valid.opf'
-    Then no errors or warnings are reported
-
-  Scenario: an 'alternate' link can identify an alternate version of the Package Document
-    When checking file 'link-rel-alternate-valid.opf'
-    Then no errors or warnings are reported
-
-  Scenario: an 'alternate' link must not be paired with other keywords
-    When checking file 'link-rel-alternate-with-other-keyword-error.opf'
-    Then error OPF-089 is reported
-    And no other errors or warnings are reported
-
-  Scenario: a 'record' link can point to a local record
-    When checking file 'link-rel-record-local-valid.opf'
-    Then no errors or warnings are reported
-
-  Scenario: a 'record' link can point to a remote record
-    When checking file 'link-rel-record-remote-valid.opf'
-    Then no errors or warnings are reported
-
-    
-  Scenario: 'record' link can be paired with other keywords
-    When checking file 'link-rel-record-with-other-keyword-valid.opf'
-    Then no errors or warnings are reported
-    
-  Scenario: a 'record' link must have a 'media-type' attribute 
-    When checking file 'link-rel-record-mediatype-missing-error.opf'
-    Then error RSC-005 is reported
-    And the message contains "media-type"
-    And no other errors or warnings are reported
-
-  Scenario: a 'record' link type can be further identified with a 'properties' attribute
-    When checking file 'link-rel-record-properties-valid.opf'
-    And no errors or warnings are reported
-
-  Scenario: a 'record' link with an unknown identifier property is reported
-    When checking file 'link-rel-record-properties-undefined-error.opf'
-    Then error OPF-027 is reported
-    And no other errors or warnings are reported
-    
-  Scenario: a 'record' link with an empty identifier property is reported
-    When checking file 'link-rel-record-properties-empty-error.opf'
-    Then error RSC-005 is reported
-    And the message contains 'value of attribute "properties" is invalid'
-    And no other errors or warnings are reported
-
-  Scenario: a 'record' link cannot refine another property or resource
-    When checking file 'link-rel-record-refines-error.opf'
-    Then error RSC-005 is reported
-    And the message contains 'must not have a "refines" attribute'
-    And no other errors or warnings are reported
-
-  Scenario: '*-record' links are deprecated 
-    When checking file 'link-rel-record-deprecated-warning.opf'
-    Then the following warnings are reported
-      | OPF-086 | "marc21xml-record" is deprecated |
-      | OPF-086 | "mods-record" is deprecated      |
-      | OPF-086 | "onix-record" is deprecated      |
-      | OPF-086 | "xmp-record" is deprecated       |
-    And no other errors or warnings are reported
-    
-  Scenario: a 'voicing' link can identify the aural representation of metadata
-    When checking file 'link-rel-voicing-valid.opf'
-    Then no errors or warnings are reported
-    
-  Scenario: a 'voicing' link must refine another property or resource
-    When checking file 'link-rel-voicing-as-publication-metadata-error.opf'
-    Then error RSC-005 is reported
-    And the message contains 'must have a "refines" attribute'
-    And no other errors or warnings are reported
-
-  Scenario: a 'voicing' link must have a 'media-type' attribute
-    When checking file 'link-rel-voicing-mediatype-missing-error.opf'
-    Then error RSC-005 is reported
-    And the message contains 'must have a "media-type" attribute'
-    And no other errors or warnings are reported
-
-  Scenario: a 'voicing' link resource must have an audio media type
-    When checking file 'link-rel-voicing-mediatype-not-audio-error.opf'
-    Then error RSC-005 is reported
-    And the message contains 'must have a "media-type" attribute identifying an audio MIME type'
-    And no other errors or warnings are reported
-    
-  Scenario: 'xml-signature' links are deprecated 
-    When checking file 'link-rel-xml-signature-deprecated-warning.opf'
-    Then warning OPF-086 is reported
-    And the message contains '"xml-signature" is deprecated'
     And no other errors or warnings are reported
