@@ -341,6 +341,24 @@ Feature: EPUB 3 — Package document
     # And no other errors or warnings are reported
     Then no other errors or warnings are reported
 
+  @spec @xref:sec-link-elem
+  Scenario: the link 'rel' attribute can have multiple properties
+    When checking file 'link-rel-multiple-properties-valid.opf'
+    Then no errors or warnings are reported
+
+  @spec @xref:sec-link-elem
+  Scenario: the link 'properties' attribute must not be empty
+    When checking file 'link-rel-record-properties-empty-error.opf'
+    Then error RSC-005 is reported
+    And the message contains 'value of attribute "properties" is invalid'
+    And no other errors or warnings are reported
+
+  @spec @xref:sec-link-elem
+  Scenario: a link with an unknown 'properties' value is reported
+    When checking file 'link-rel-record-properties-undefined-error.opf'
+    Then error OPF-027 is reported
+    And no other errors or warnings are reported
+    
   Scenario: the 'link' element can have an 'hreflang' attribute
     When checking file 'link-hreflang-valid.opf'
     Then no other errors or warnings are reported

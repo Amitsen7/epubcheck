@@ -362,3 +362,7 @@
     Then fatal error RSC-016 is reported (parsing error)
     And error RSC-005 is reported (schema error)
     And no other errors or warnings are reported
+
+  Scenario: Verify an attribute value with leading/trailing whitespace is allowed (issue 332)
+    When checking EPUB 'conformance-xml-id-leading-trailing-spaces-valid'
+    Then no errors or warnings are reported

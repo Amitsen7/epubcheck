@@ -172,6 +172,23 @@ Feature: EPUB 3 — Media Overlays
     Then usage OPF-088 is reported
     And no other errors or warnings are reported
 
+
+  ### 9.3.4 Associating style information
+
+  @spec @xref:sec-docs-assoc-style
+  Scenario: Report a 'media:active-class' property with a refines attribute
+    When checking file 'mediaoverlays-active-class-refines-error.opf'
+    Then error RSC-005 is reported
+    And the message contains "must not be used with the media:active-class property"
+    And no other errors or warnings are reported
+  
+  @spec @xref:sec-docs-assoc-style
+  Scenario: Report a 'media:playback-active-class' property with a refines attribute
+    When checking file 'mediaoverlays-playback-active-class-refines-error.opf'
+    Then error RSC-005 is reported
+    And the message contains "must not be used with the media:playback-active-class property"
+    And no other errors or warnings are reported
+
     
   ### 9.3.5 Media overlays packaging
 
