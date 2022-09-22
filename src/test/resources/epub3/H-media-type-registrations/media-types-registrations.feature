@@ -10,7 +10,7 @@ Feature: EPUB 3 — Media Types Registrations
     And EPUBCheck with default settings
   
   # FIXME this should be at most a usage report, not a warning
-  Scenario: Report when the '.epub' extension is not lower case
+  Scenario: Report when the `.epub` extension is not lower case
     When checking EPUB 'ocf-extension-not-lower-case-warning.ePub'
     Then warning PKG-016 is reported
     And no other errors or warnings are reported

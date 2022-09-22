@@ -24,7 +24,7 @@ Feature: EPUB 3 — Open Container Format
   ###  4.1.3 File paths and file names
 
   @spec @xref:sec-container-filenames
-  Scenario: Verify a file name containing a `+` character is allowed (issue 188)
+  Scenario: Verify a file name containing a '+' character is allowed (issue 188)
     When checking EPUB 'ocf-container-filename-character-plus-valid'
     Then no errors or warnings are reported
 
@@ -73,7 +73,7 @@ Feature: EPUB 3 — Open Container Format
     And no other errors or warnings are reported
 
   @spec @xref:sec-container-metainf-container.xml
-  Scenario: Report a missing 'container.xml' file
+  Scenario: Report a missing `container.xml` file
     When checking EPUB 'ocf-container-file-missing-fatal'
     Then fatal error RSC-002 is reported
     Then no errors or warnings are reported
@@ -105,8 +105,7 @@ Feature: EPUB 3 — Open Container Format
     And the message contains 'expected element "encryption"'
     And no other errors or warnings are reported
 
-  Scenario: Verify encryption can be used
-    (but file will not be parsed)
+  Scenario: Verify encryption can be used (but file will not be parsed)
     Given the reporting level is set to INFO
     When checking EPUB 'ocf-encryption-unknown-valid'
     Then info RSC-004 is reported
@@ -136,7 +135,7 @@ Feature: EPUB 3 — Open Container Format
   ##### 4.1.6.3.6.1 The signatures element
 
   @spec @xref:sec-signatures.xml-signatures
-  Scenario: Report a `signature.xml` file with invald markup
+  Scenario: Report a `signature.xml` file with invalid markup
     When checking EPUB 'ocf-signatures-content-model-error'
     Then error RSC-005 is reported
     And the message contains 'expected element "signatures"'
@@ -169,7 +168,7 @@ Feature: EPUB 3 — Open Container Format
     And no other errors or warnings are reported
 
   @spec @xref:sec-zip-container-zipreqs
-  Scenario: Report an unreadable ZIP file (image file with an '.epub' extension)
+  Scenario: Report an unreadable ZIP file (image file with an `.epub` extension)
     When checking EPUB 'ocf-zip-unreadable-image-with-epub-extension-fatal.epub'
     Then fatal error PKG-004 is reported (corrupted ZIP header)
     Then fatal error PKG-008 is reported (error in opening ZIP file)
@@ -215,7 +214,7 @@ Feature: EPUB 3 — Open Container Format
     And no other errors or warnings are reported
 
   @spec @xref:sec-zip-container-mime
-  Scenario: Report when the 'mimetype' entry has an extra field in its ZIP header
+  Scenario: Report when the `mimetype` entry has an extra field in its ZIP header
     When checking EPUB 'ocf-zip-mimetype-entry-extra-field-error.epub'
     Then error PKG-005 is reported
     And no other errors or warnings are reported
@@ -231,7 +230,7 @@ Feature: EPUB 3 — Open Container Format
     Then no errors or warnings are reported
 
   @spec @xref:obfus-specifying
-  Scenario: Report an obfuscated font that is not a Core Media Type
+  Scenario: Report an obfuscated font that is not a core media type
     When checking EPUB 'ocf-obfuscation-not-cmt-error'
     Then error PKG-026 is reported
     And no errors or warnings are reported

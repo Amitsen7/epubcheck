@@ -14,17 +14,17 @@ Feature: EPUB 3 — Vocabularies — Media overlays vocabulary
   ### D.8.2 duration
   
   @spec @xref:sec-duration
-  Scenario: the 'media:duration' property can be expressed as a full clock value
+  Scenario: The `media:duration` property can be expressed as a full clock value
     When checking file 'mediaoverlays-duration-fullclock-valid.opf'
     Then no errors or warnings are reported
   
   @spec @xref:sec-duration
-  Scenario: the 'media:duration' property can be expressed as a timecount value
+  Scenario: The `media:duration` property can be expressed as a timecount value
     When checking file 'mediaoverlays-duration-timecount-valid.opf'
     Then no errors or warnings are reported
   
   @spec @xref:sec-duration
-  Scenario: Report 'media:duration' properties with non-clock values
+  Scenario: Report `media:duration` properties with non-clock values
     When checking file 'mediaoverlays-duration-clock-values-error.opf'
     Then the following errors are reported
       | RSC-005 | must be a valid SMIL3 clock value |

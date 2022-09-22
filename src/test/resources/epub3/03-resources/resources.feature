@@ -15,12 +15,12 @@
 
   ####  Audio core media types
 
-  Scenario: items with Core Media Types do not require fallbacks
+  Scenario: Items with Core Media Types do not require fallbacks
       The test document contains one item of each supported core media types
     When checking file 'resources-core-media-types-valid.opf'
     Then no errors or warnings are reported
 
-  Scenario: items with Core Media Types that are not preferred types are reported as usage
+  Scenario: Items with Core Media Types that are not preferred types are reported as usage
       The test document contains one item of each non-preferred core media types
     When the reporting level is set to USAGE
     And checking EPUB 'resources-core-media-types-not-preferred-valid.opf'
@@ -119,19 +119,19 @@
   ### 3.5.1 Manifest fallbacks
   
   @spec @xref:sec-manifest-fallbacks
-  Scenario: Allow non-CMT file to be in the spine if they have an XHTML Content Document fallback
+  Scenario: Allow non-CMT file to be in the spine if they have an XHTML content document fallback
     Note: here an audio file is used in the spine
     When checking file 'fallback-to-xhtml-valid.opf'
     Then no errors or warnings are reported
     
   @spec @xref:sec-manifest-fallbacks
-  Scenario: Allow an SVG Content Document to be used as a fallback
+  Scenario: Allow an SVG content document to be used as a fallback
     Note: here an image file is used in the spine
     When checking file 'fallback-to-svg-valid.opf'
     Then no errors or warnings are reported
     
   @spec @xref:sec-manifest-fallbacks
-  Scenario: Allow a deep fallback chain as long as it contains a Content Document
+  Scenario: Allow a deep fallback chain as long as it contains a content document
     Note: here a font file is used in the spine
     When checking file 'fallback-chain-valid.opf'
     Then no errors or warnings are reported
@@ -140,11 +140,11 @@
   Scenario: Report a cycle in the fallback chain
     When checking file 'fallback-cycle-error.opf'
     Then error OPF-045 is reported (circular reference)
-    And error OPF-044 is reported (no Content Document fallback was found) 
+    And error OPF-044 is reported (no content document fallback was found) 
     And no other errors or warnings are reported
 
   @spec @xref:sec-manifest-fallbacks
-  Scenario: Report files that aren't Content Documents (like audio) in spine when they don't have a fallback  
+  Scenario: Report files that aren't content documents (like audio) in spine when they don't have a fallback  
     Note: here an audio file is used in the spine
     When checking file 'fallback-missing-error.opf'
     Then error OPF-043 is reported
@@ -186,7 +186,7 @@
     And no other errors or warnings are reported
 
   @spec @xref:sec-fallbacks-img
-  Scenario: Report a `picture source` element that references a foreign resource but incorrectly states a core media type in its `type` attribute
+  Scenario: Report a `picture source` element that references a foreign resource but incorrectly states a core media type in its 'type' attribute
     When checking EPUB 'content-xhtml-picture-source-foreign-with-cmt-type-error'
     Then error MED-007 is reported
     And no other errors or warnings are reported
@@ -194,13 +194,13 @@
 
   ## 3.6 Resources Locations
   
-  Scenario: remote XHTML document is not detected in single-document mode
+  Scenario: Remote XHTML document is not detected in single-document mode
   	Remote resources checks depend on publication-wide validation
     (e.g. to check if the resource is used a font)
     When checking file 'resources-remote-xhtml-error.opf'
     Then no errors or warnings are reported
     
-  Scenario: remote SVG document is not detected in single-document mode
+  Scenario: Remote SVG document is not detected in single-document mode
     Remote resources checks depend on publication-wide validation
     (e.g. to check if the resource is used a font)
     When checking file 'resources-remote-svg-font-valid.opf'
@@ -217,8 +217,7 @@
     Then no errors or warnings are reported
 
   @spec @xref:sec-resource-locations
-  Scenario: Verify that remote audio resources are allowed anywhere
-    (not only in `audio` elements)
+  Scenario: Verify that remote audio resources are allowed anywhere (not only in `audio` elements)
     When checking EPUB 'resources-remote-audio-object-valid'
     Then no errors or warnings are reported
 
@@ -238,8 +237,7 @@
     Then no errors or warnings are reported
 
   @spec @xref:sec-resource-locations
-  Scenario: Verify that remote video resources are allowed anywhere
-    (not only in `video` elements)
+  Scenario: Verify that remote video resources are allowed anywhere (not only in `video` elements)
     When checking EPUB 'resources-remote-audio-object-valid'
     Then no errors or warnings are reported
 
@@ -307,7 +305,7 @@
     And no other errors or warnings are reported
 
   @spec @xref:sec-resource-locations
-  Scenario: Report a remote SVG Content Document
+  Scenario: Report a remote SVG content document
     When checking EPUB 'resources-remote-svg-contentdoc-error'
     Then error RSC-006 is reported
     And no other errors or warnings are reported
@@ -316,7 +314,7 @@
   Scenario: Verify that a remote foreign resource is allowed when used by a script
     Given the reporting level set to usage
     When checking EPUB 'resources-remote-resource-for-script-foreign-valid'
-    Then usage OPF-018b is reported (since the `remote-resources` property couldn't be verified)
+    Then usage OPF-018b is reported (since the 'remote-resources' property couldn't be verified)
     And usage RSC-006b is reported (to suggest checking scripts manually)
     And no other errors or warnings are reported
 
@@ -324,12 +322,12 @@
   Scenario: Verify that a remote core media type resource is allowed when used by a script
     Given the reporting level set to usage
     When checking EPUB 'resources-remote-resource-for-script-cmt-valid'
-    Then usage OPF-018b is reported (since the `remote-resources` property couldn't be verified)
+    Then usage OPF-018b is reported (since the 'remote-resources' property couldn't be verified)
     And usage RSC-006b is reported (to suggest checking scripts manually)
     And no other errors or warnings are reported
 
   @spec @xref:sec-resource-locations
-  Scenario: Report a remote top-level Content Documents
+  Scenario: Report a remote top-level content document
     When checking EPUB 'resources-remote-spine-item-error'
     Then error RSC-006 is reported
     And no other errors or warnings are reported
@@ -350,14 +348,14 @@
   ## 3.9 XML conformance
 
   @spec @xref:sec-xml-constraint
-  Scenario: a not well-formed Package Document is reported 
+  Scenario: A not well-formed package document is reported 
     When checking file 'conformance-xml-malformed-error.opf'
     Then fatal error RSC-016 is reported (parsing error)
     And error RSC-005 is reported (schema error)
     And no other errors or warnings are reported
     
   @spec @xref:sec-xml-constraint
-  Scenario: using a not-declared namespace is not allowed 
+  Scenario: Using a not-declared namespace is not allowed 
     When checking file 'conformance-xml-undeclared-namespace-error.opf'
     Then fatal error RSC-016 is reported (parsing error)
     And error RSC-005 is reported (schema error)

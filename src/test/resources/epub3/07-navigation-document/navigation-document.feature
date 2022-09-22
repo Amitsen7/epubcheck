@@ -18,7 +18,7 @@ Feature: EPUB 3 — Navigation Document
     Then no errors or warnings are reported
 
   @spec @xref:sec-nav-content-req
-  Scenario: Report a missing `toc` nav
+  Scenario: Report a missing `toc nav`
   	Given EPUBCheck configured to check a navigation document
     When checking document 'nav-toc-missing-error.xhtml'
     Then error RSC-005 is reported (toc nav missing)
@@ -33,7 +33,7 @@ Feature: EPUB 3 — Navigation Document
   ##  7.3 The nav element: restrictions
       
   @spec @xref:sec-nav-def-model
-  Scenario: Report an empty nav heading 
+  Scenario: Report an empty `nav` heading 
   	Given EPUBCheck configured to check a navigation document
     When checking document 'content-model-heading-empty-error.xhtml'
     Then error RSC-005 is reported
@@ -41,7 +41,7 @@ Feature: EPUB 3 — Navigation Document
     And no other errors or warnings are reported
 
   @spec @xref:sec-nav-def-model
-  Scenario: Report a `p` element used as a nav heading
+  Scenario: Report a `p` element used as a `nav` heading
   	Given EPUBCheck configured to check a navigation document
     When checking document 'content-model-heading-p-error.xhtml'
     Then error RSC-005 is reported
@@ -73,7 +73,7 @@ Feature: EPUB 3 — Navigation Document
     And no other errors or warnings are reported
 
   @spec @xref:sec-nav-def-model
-  Scenario: Report a nav hyperlink without content
+  Scenario: Report a `nav` hyperlink without content
   	Given EPUBCheck configured to check a navigation document
     When checking document 'content-model-a-empty-error.xhtml'
     Then error RSC-005 is reported
@@ -81,7 +81,7 @@ Feature: EPUB 3 — Navigation Document
     And no other errors or warnings are reported
 
   @spec @xref:sec-nav-def-model
-  Scenario: Report a nav hyperlink without content (but an empty nested span)
+  Scenario: Report a `nav` hyperlink without content (but an empty nested `span`)
   	Given EPUBCheck configured to check a navigation document
     When checking document 'content-model-a-span-empty-error.xhtml'
     Then the following errors are reported (two errors as a side effect)
@@ -96,7 +96,7 @@ Feature: EPUB 3 — Navigation Document
     Then no errors or warnings are reported
 
   @spec @xref:sec-nav-def-model
-  Scenario: Report a nav list without content
+  Scenario: Report a `nav` list without content
   	Given EPUBCheck configured to check a navigation document
     When checking document 'content-model-ol-empty-error.xhtml'
     Then error RSC-005 is reported
@@ -110,13 +110,13 @@ Feature: EPUB 3 — Navigation Document
     And no other errors or warnings are reported
 
   @spec @xref:sec-nav-def-model
-  Scenario: Report external links in the `toc`, `page-list` and `landmarks` `nav` elements
+  Scenario: Report external links in the `toc`, `page-list` and `landmarks nav` elements
     When checking EPUB 'nav-links-remote-error'
     Then error NAV-010 is reported 3 times
     And no other errors or warnings are reported
 
   @spec @xref:sec-nav-def-model
-  Scenario: Report a `toc nav` that links to resource that is not a Content Document
+  Scenario: Report a `toc nav` that links to resource that is not an EPUB content document
     When checking EPUB 'nav-links-to-non-content-document-type-error'
     Then error RSC-010 is reported
     And no other errors or warnings are reported
@@ -129,9 +129,9 @@ Feature: EPUB 3 — Navigation Document
 
   ##  7.4 The nav element: types
 
-  ###  7.4.2 The `toc nav` element
+  ###  7.4.2 The 'toc nav' element
 
-  Scenario: Allow a nested `toc` nav
+  Scenario: Allow a nested `toc nav`
   	Given EPUBCheck configured to check a navigation document
     When checking document 'nav-toc-nested-valid.xhtml'
     Then no errors or warnings are reported
@@ -157,23 +157,23 @@ Feature: EPUB 3 — Navigation Document
 
 
 
-  ###  7.3.3 The `page-list nav` element  
+  ###  7.3.3 The 'page-list nav' element  
 
   @spec @xref:sec-nav-pagelist
-  Scenario: Allow a `page-list` nav
+  Scenario: Allow a `page-list nav`
   	Given EPUBCheck configured to check a navigation document
     When checking document 'nav-page-list-valid.xhtml'
     Then no errors or warnings are reported
 
   @spec @xref:sec-nav-pagelist
-  Scenario: Report multiple occurences of `page-list` nav
+  Scenario: Report multiple occurences of `page-list nav`
   	Given EPUBCheck configured to check a navigation document
     When checking document 'nav-page-list-multiple-error.xhtml'
     Then error RSC-005 is reported
     And the message contains 'Multiple occurrences of the "page-list" nav element'
     And no other errors or warnings are reported
 
-  Scenario: Report nested `ol` in `page-list` nav
+  Scenario: Report nested `ol` in `page-list nav`
   	Given EPUBCheck configured to check a navigation document
     When checking document 'nav-page-list-nested-warning.xhtml'
     Then warning RSC-017 is reported
@@ -194,16 +194,16 @@ Feature: EPUB 3 — Navigation Document
     And no other errors or warnings are reported
 
 
-  ### 7.3.4 The `landmarks nav` element
+  ### 7.3.4 The 'landmarks nav' element
 
   @spec @xref:sec-nav-landmarks
-  Scenario: Allow a `landmarks` nav
+  Scenario: Allow a `landmarks nav`
   	Given EPUBCheck configured to check a navigation document
     When checking document 'nav-landmarks-valid.xhtml'
     Then no errors or warnings are reported
 
   @spec @xref:sec-nav-landmarks
-  Scenario: Report a link without an epub:type in a `landmarks` nav
+  Scenario: Report a link without an `epub:type` in a `landmarks nav`
   	Given EPUBCheck configured to check a navigation document
     When checking document 'nav-landmarks-link-type-missing-error.xhtml'
     Then error RSC-005 is reported
@@ -211,7 +211,7 @@ Feature: EPUB 3 — Navigation Document
     And no other errors or warnings are reported
 
   @spec @xref:sec-nav-landmarks
-  Scenario: Report multiple occurences of `landmarks` nav
+  Scenario: Report multiple occurences of `landmarks nav`
   	Given EPUBCheck configured to check a navigation document
     When checking document 'nav-landmarks-multiple-error.xhtml'
     Then error RSC-005 is reported
@@ -219,20 +219,20 @@ Feature: EPUB 3 — Navigation Document
     And no other errors or warnings are reported
 
   @spec @xref:sec-nav-landmarks
-  Scenario: Allow multiple entries with the same epub:type in a `landmarks` nav when pointing to different resources
+  Scenario: Allow multiple entries with the same `epub:type` in a `landmarks nav` when pointing to different resources
   	Given EPUBCheck configured to check a navigation document
     When checking document 'nav-landmarks-type-twice-valid.xhtml'
     Then no errors or warnings are reported
 
   @spec @xref:sec-nav-landmarks
-  Scenario: Report multiple entries with the same epub:type in a `landmarks` nav
+  Scenario: Report multiple entries with the same `epub:type` in a `landmarks nav`
   	Given EPUBCheck configured to check a navigation document
     When checking document 'nav-landmarks-type-twice-same-resource-error.xhtml'
     Then error RSC-005 is reported 2 times
     And the message contains 'Another landmark was found with the same epub:type and same reference'
     And no other errors or warnings are reported
 
-  Scenario: Report nested `ol` in `landmarks` nav
+  Scenario: Report nested `ol` in `landmarks nav`
   	Given EPUBCheck configured to check a navigation document
     When checking document 'nav-landmarks-nested-warning.xhtml'
     Then warning RSC-017 is reported
@@ -240,16 +240,16 @@ Feature: EPUB 3 — Navigation Document
     And the message contains "no nested sublists"
     And no other errors or warnings are reported
     
-  ### 7.4.5 Other `nav` elements
+  ### 7.4.5 Other 'nav' elements
 
   @spec @xref:sec-nav-def-types-other
-  Scenario: Allow a `lot` nav
+  Scenario: Allow a `lot nav`
   	Given EPUBCheck configured to check a navigation document
     When checking document 'nav-other-lot-valid.xhtml'
     Then no errors or warnings are reported
     
   @spec @xref:sec-nav-def-types-other
-  Scenario: Report a nav other than 'toc'/'page-list'/'landmarks' without a heading
+  Scenario: Report a nav other than `toc`/`page-list`/`landmarks` without a heading
   	Given EPUBCheck configured to check a navigation document
     When checking document 'nav-other-heading-missing-error.xhtml'
     Then error RSC-005 is reported
@@ -257,19 +257,19 @@ Feature: EPUB 3 — Navigation Document
     And no other errors or warnings are reported
 
   @spec @xref:sec-nav-def-types-other
-  Scenario: Verify a nav without a declared epub:type is not restricted
+  Scenario: Verify a `nav` without a declared `epub:type` is not restricted
     When checking document 'nav-type-missing-not-restricted-valid.xhtml'
     Then no errors or warnings are reported
 
 
   ## 7.5 Use in the spine
 
-  Scenario: Allow a hidden nav (set on a `page-list` nav)
+  Scenario: Allow a hidden `nav` (set on a `page-list nav`)
   	Given EPUBCheck configured to check a navigation document
     When checking document 'hidden-nav-valid.xhtml'
     Then no errors or warnings are reported
     
-  Scenario: Report a hidden attribute with a wrong value
+  Scenario: Report a `hidden` attribute with a wrong value
   	Given EPUBCheck configured to check a navigation document
     When checking document 'hidden-attribute-invalid-error.xhtml'
     Then error RSC-005 is reported

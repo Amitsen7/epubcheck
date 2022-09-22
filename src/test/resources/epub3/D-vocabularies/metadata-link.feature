@@ -16,7 +16,7 @@ Feature: EPUB 3 — Vocabularies — Metadata link vocabulary
   #### D.4.1.1 acquire
   
   @spec @xref:sec-acquire
-  Scenario: an 'acquire' link can identify the full version of the publication
+  Scenario: An `acquire link` can identify the full version of the publication
     When checking file 'link-rel-acquire-valid.opf'
     Then no errors or warnings are reported
 
@@ -24,12 +24,12 @@ Feature: EPUB 3 — Vocabularies — Metadata link vocabulary
   #### D.4.1.2 alternate
   
   @spec @xref:sec-alternate
-  Scenario: an 'alternate' link can identify an alternate version of the Package Document
+  Scenario: An `alternate link` can identify an alternate version of the package document
     When checking file 'link-rel-alternate-valid.opf'
     Then no errors or warnings are reported
 
   @spec @xref:sec-alternate
-  Scenario: an 'alternate' link must not be paired with other keywords
+  Scenario: An `alternate link` must not be paired with other keywords
     When checking file 'link-rel-alternate-with-other-keyword-error.opf'
     Then error OPF-089 is reported
     And no other errors or warnings are reported
@@ -37,7 +37,7 @@ Feature: EPUB 3 — Vocabularies — Metadata link vocabulary
 
   #### D.4.1.3, D.4.1.4, D.4.1.5, D.4.1.9 *-record
   
-  Scenario: '*-record' links are deprecated 
+  Scenario: `*-record` links are deprecated 
     When checking file 'link-rel-record-deprecated-warning.opf'
     Then the following warnings are reported
       | OPF-086 | "marc21xml-record" is deprecated |
@@ -49,31 +49,31 @@ Feature: EPUB 3 — Vocabularies — Metadata link vocabulary
     
   #### D.4.1.6 record
   
-  Scenario: a 'record' link can point to a local record
+  Scenario: A `record link` can point to a local record
     When checking file 'link-rel-record-local-valid.opf'
     Then no errors or warnings are reported
 
-  Scenario: a 'record' link can point to a remote record
+  Scenario: A `record link` can point to a remote record
     When checking file 'link-rel-record-remote-valid.opf'
     Then no errors or warnings are reported
     
-  Scenario: 'record' link can be paired with other keywords
+  Scenario: A `record link` can be paired with other keywords
     When checking file 'link-rel-record-with-other-keyword-valid.opf'
     Then no errors or warnings are reported
   
   @spec @xref:sec-record
-  Scenario: a 'record' link must have a 'media-type' attribute 
+  Scenario: A `record` link must have a `media-type` attribute 
     When checking file 'link-rel-record-mediatype-missing-error.opf'
     Then error RSC-005 is reported
     And the message contains "media-type"
     And no other errors or warnings are reported
 
-  Scenario: a 'record' link type can be further identified with a 'properties' attribute
+  Scenario: A `record link` type can be further identified with a `properties` attribute
     When checking file 'link-rel-record-properties-valid.opf'
     And no errors or warnings are reported
 
   @spec @xref:sec-record
-  Scenario: a 'record' link cannot refine another property or resource
+  Scenario: A `record link` cannot refine another property or resource
     When checking file 'link-rel-record-refines-error.opf'
     Then error RSC-005 is reported
     And the message contains 'must not have a "refines" attribute'
@@ -83,26 +83,26 @@ Feature: EPUB 3 — Vocabularies — Metadata link vocabulary
   #### D.4.1.7 voicing
   
   @spec @xref:sec-voicing
-  Scenario: a 'voicing' link can identify the aural representation of metadata
+  Scenario: A `voicing link` can identify the aural representation of metadata
     When checking file 'link-rel-voicing-valid.opf'
     Then no errors or warnings are reported
     
   @spec @xref:sec-voicing
-  Scenario: a 'voicing' link must refine another property or resource
+  Scenario: A `voicing link` must refine another property or resource
     When checking file 'link-rel-voicing-as-publication-metadata-error.opf'
     Then error RSC-005 is reported
     And the message contains 'must have a "refines" attribute'
     And no other errors or warnings are reported
 
   @spec @xref:sec-voicing
-  Scenario: a 'voicing' link must have a 'media-type' attribute
+  Scenario: A `voicing link` must have a `media-type` attribute
     When checking file 'link-rel-voicing-mediatype-missing-error.opf'
     Then error RSC-005 is reported
     And the message contains 'must have a "media-type" attribute'
     And no other errors or warnings are reported
 
   @spec @xref:sec-voicing
-  Scenario: a 'voicing' link resource must have an audio media type
+  Scenario: A `voicing link` resource must have an audio media type
     When checking file 'link-rel-voicing-mediatype-not-audio-error.opf'
     Then error RSC-005 is reported
     And the message contains 'must have a "media-type" attribute identifying an audio MIME type'
@@ -111,7 +111,7 @@ Feature: EPUB 3 — Vocabularies — Metadata link vocabulary
 
   #### D.4.1.8 xml-signature
     
-  Scenario: 'xml-signature' links are deprecated 
+  Scenario: `xml-signature` links are deprecated 
     When checking file 'link-rel-xml-signature-deprecated-warning.opf'
     Then warning OPF-086 is reported
     And the message contains '"xml-signature" is deprecated'

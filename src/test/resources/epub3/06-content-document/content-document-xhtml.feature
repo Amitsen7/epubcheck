@@ -12,25 +12,25 @@ Feature: EPUB 3 — Content Documents — XHTML
 
   ##  6.1 XHTML Content Documents
   
-  Scenario: Verify that an XHTML Content Document can have any extension
+  Scenario: Verify that an XHTML content document can have any extension
     When checking EPUB 'content-xhtml-file-extension-unusual-valid'
     Then no errors or warnings are reported
 
   ###  6.1.2 XHTML requirements
 
   @spec @xref:sec-xhtml-req
-  Scenario: Minimal Content Document
+  Scenario: Minimal content document
     When checking document 'minimal.xhtml'
     Then no errors or warnings are reported
 
   @spec @xref:sec-xhtml-req
-  Scenario: Report RelaxNG schema errors when checking a Content Document in a full publication
+  Scenario: Report RelaxNG schema errors when checking a content document in a full publication
     When checking EPUB 'content-xhtml-relaxng-error'
     Then error RSC-005 is reported
     And no other errors or warnings are reported
 
   @spec @xref:sec-xhtml-req
-  Scenario: Report Schematron schema errors when checking a Content Document in a full publication
+  Scenario: Report Schematron schema errors when checking a content document in a full publication
     When checking EPUB 'content-xhtml-schematron-error'
     Then error RSC-005 is reported
     And no other errors or warnings are reported
@@ -149,7 +149,7 @@ Feature: EPUB 3 — Content Documents — XHTML
     When checking document 'aria-roles-footer-valid.xhtml'
     Then no errors or warnings are reported
 
-  Scenario: Verify the DPUB-ARIA roles allowed on `h1`-'h6`
+  Scenario: Verify the DPUB-ARIA roles allowed on `h1`-`h6`
     When checking document 'aria-roles-h1-h6-valid.xhtml'
     Then no errors or warnings are reported
 
@@ -192,12 +192,12 @@ Feature: EPUB 3 — Content Documents — XHTML
 
   Scenario: Verify that a base url can be set
     When checking EPUB 'content-xhtml-base-url-valid'
-    Then warning HTM-055 is reported (side effect of `base` being discouraged)
+    Then warning HTM-055 is reported (side effect of 'base' being discouraged)
     Then no errors or warnings are reported
 
   Scenario: Report relative paths as remote resources when HTML `base` is set to an extenal URL (issue 155)
     When checking EPUB 'content-xhtml-base-url-remote-relative-path-error'
-    Then warning HTM-055 is reported (side effect of `base` being discouraged)
+    Then warning HTM-055 is reported (side effect of 'base' being discouraged)
     Then error RSC-006 is reported
     And no other errors or warnings are reported
 
@@ -230,14 +230,14 @@ Feature: EPUB 3 — Content Documents — XHTML
     Then no errors or warnings are reported
 
   Scenario: Report invalid elements after a `data-*` attribute
-    See issue 189 - was allowed by stripping of `data-*` attributes
+    See issue 189 - was allowed by stripping of 'data-*' attributes
     When checking EPUB 'content-xhtml-data-attr-removal-markup-error'
     Then error RSC-005 is reported
     And the message contains 'element "somebadxhtmlformatting" not allowed here'
     And no other errors or warnings are reported
 
   Scenario: Verify fragment identifiers are allowed in attributes after a `data-*` declaration
-    See issue 198 - caused error from stripping of `data-*` attributes
+    See issue 198 - caused error from stripping of 'data-*' attributes
     When checking EPUB 'content-xhtml-data-attr-removal-fragments-valid'
     Then no errors or warnings are reported
 
@@ -366,7 +366,7 @@ Feature: EPUB 3 — Content Documents — XHTML
 
   Scenario: Report non-SVG images referenced as fragments
     When checking EPUB 'content-xhtml-img-fragment-non-svg-warning'
-    Then warning RSC-009 is reported 2 times (1 for an HTML `img` element, 1 for an SVG `image` element)
+    Then warning RSC-009 is reported 2 times (1 for an HTML 'img' element, 1 for an SVG 'image' element)
     And no other errors or warnings are reported
 
   @spec @xref:sec-manifest-elem
@@ -551,7 +551,7 @@ Feature: EPUB 3 — Content Documents — XHTML
     And no other errors or warnings are reported
 
   @spec @xref:sec-item-elem
-  Scenario: Report an `object` element with a media type not matching the Package Document declaration
+  Scenario: Report an `object` element with a media type not matching the package document declaration
     When checking EPUB 'content-xhtml-object-mediatype-mismatch-error'
     Then error OPF-013 is reported
     And no other errors or warnings are reported
@@ -945,7 +945,7 @@ Feature: EPUB 3 — Content Documents — XHTML
     Then no errors or warnings are reported
 
   @spec @xref:sec-xhtml-deviations
-  Scenario: Verify MathML markup with `annotation-xml` `name` attribute set to `contentequiv`
+  Scenario: Verify MathML markup with `annotation-xml name` attribute set to `contentequiv`
     When checking document 'mathml-anno-xhtml-contentequiv-valid.xhtml'
     Then no errors or warnings are reported
 
@@ -957,7 +957,7 @@ Feature: EPUB 3 — Content Documents — XHTML
     When checking document 'mathml-anno-svg-valid.xhtml'
     Then no errors or warnings are reported
 
-  Scenario: Report a MathML annotation with the XHTML encoding reversed (application/xml+xhtml)
+  Scenario: Report a MathML annotation with the XHTML encoding reversed (`application/xml+xhtml`)
     When checking document 'mathml-anno-xhtml-encoding-error.xhtml'
     Then error RSC-005 is reported
     And the message contains 'value of attribute "encoding" is invalid; must be equal to'

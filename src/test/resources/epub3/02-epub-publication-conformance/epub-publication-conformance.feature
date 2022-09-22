@@ -13,7 +13,7 @@ Feature: EPUB 3 — EPUB publication conformance
   ##  2. EPUB publication conformance
 
   @spec @xref:sec-epub-conf
-  Scenario: the minimal Package Document is reported as valid 
+  Scenario: The minimal package document is reported as valid 
     When checking file 'minimal.opf'
     Then no errors or warnings are reported
 

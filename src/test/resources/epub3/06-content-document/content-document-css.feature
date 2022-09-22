@@ -22,14 +22,14 @@ Feature: EPUB 3 — Content Documents — CSS
   ##### Properties not allowed in EPUB
 
   @spec @xref:sec-css-req
-  Scenario: Report the use of the CSS 'direction' property 
+  Scenario: Report the use of the CSS `direction` property 
     When checking EPUB 'content-css-property-direction-error'
     Then error CSS-001 is reported
     And the message contains 'direction'
     And no other errors or warnings are reported
 
   @spec @xref:sec-css-req
-  Scenario: Report the use of the CSS 'unicode-bidi' property 
+  Scenario: Report the use of the CSS `unicode-bidi` property 
     When checking EPUB 'content-css-property-unicode-bidi-error'
     Then error CSS-001 is reported
     And the message contains 'unicode-bidi'

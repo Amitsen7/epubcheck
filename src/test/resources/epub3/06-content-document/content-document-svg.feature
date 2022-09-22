@@ -13,7 +13,7 @@ Feature: EPUB 3 — Content Documents — SVG
   ##  6.2 SVG Content Documents
 
   @spec @xref:sec-spine-elem
-  Scenario: Verify that SVG Content Documents can be referenced in the spine
+  Scenario: Verify that SVG content documents can be referenced in the spine
     When checking EPUB 'content-svg-in-spine-valid'
     Then no errors or warnings are reported
 
@@ -26,7 +26,7 @@ Feature: EPUB 3 — Content Documents — SVG
     Then error RSC-015 is reported
     And no other errors or warnings are reported
 
-  Scenario: Verify that an SVG Content Document can have any extension
+  Scenario: Verify that an SVG content document can have any extension
     When checking EPUB 'content-svg-file-extension-unusual-valid'
     Then no errors or warnings are reported
 

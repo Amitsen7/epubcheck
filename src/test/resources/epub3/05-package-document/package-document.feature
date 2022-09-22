@@ -12,7 +12,7 @@ Feature: EPUB 3 — Package document
 
   ##  5. Package Document
 
-  Scenario: Verify that the Package Document can have any extension
+  Scenario: Verify that the package document can have any extension
     When checking EPUB 'package-file-extension-unusual-valid'
     Then no errors or warnings are reported
 
@@ -22,7 +22,7 @@ Feature: EPUB 3 — Package document
   ### 5.3.1 The dir attribute
   
   @spec @xref:attrdef-dir
-  Scenario: the 'dir' attribute value can be 'auto' 
+  Scenario: The `dir` attribute value can be `auto`
     When checking file 'attr-dir-auto-valid.opf'
     Then no errors or warnings are reported
 
@@ -30,7 +30,7 @@ Feature: EPUB 3 — Package document
   ### 5.3.2 The href attribute
   
   @spec @xref:attrdef-href
-  Scenario: 'link' target must not reference a manifest ID
+  Scenario: `link` target must not reference a manifest ID
     When checking file 'link-to-publication-resource-error.opf'
     Then error OPF-067 is reported
     And no other errors or warnings are reported
@@ -39,18 +39,18 @@ Feature: EPUB 3 — Package document
 
   ### 5.3.3 The id attribute
   
-  Scenario: 'id' attributes can have leading or trailing space 
+  Scenario: `id` attributes can have leading or trailing space 
     When checking file 'attr-id-with-spaces-valid.opf'
     Then no errors or warnings are reported
   
   @spec @xref:attrdef-id
-  Scenario: 'id' attributes must be unique 
+  Scenario: `id` attributes must be unique 
     When checking file 'attr-id-duplicate-error.opf'
     Then error RSC-005 is reported 2 times (once for each ID)
     And no other errors or warnings are reported
   
   @spec @xref:attrdef-id
-  Scenario: 'id' attributes must be unique after whitespace normalization 
+  Scenario: `id` attributes must be unique after whitespace normalization 
     When checking file 'attr-id-duplicate-with-spaces-error.opf'
     Then error RSC-005 is reported 2 times (once for each ID)
     And no other errors or warnings are reported
@@ -59,27 +59,27 @@ Feature: EPUB 3 — Package document
   ### 5.3.6 The refines attribute
   
   @spec @xref:attrdef-refines
-  Scenario: 'refines' attribute MUST be a relative URL 
+  Scenario: `refines` attribute MUST be a relative URL 
     When checking file 'metadata-refines-not-relative-error.opf'
     Then error RSC-005 is reported
     And the message contains "@refines must be a relative URL"
     And no other errors or warnings are reported
 
-  Scenario: 'refines' attribute should use a fragment ID if refering to a Publication Resource 
+  Scenario: `refines` attribute should use a fragment ID if refering to a Publication Resource 
     When checking file 'metadata-refines-not-a-fragment-warning.opf'
     Then warning RSC-017 is reported
     And the message contains "using a fragment identifier pointing to its manifest item"
     And no other errors or warnings are reported
 
   @spec @xref:attrdef-refines
-  Scenario: 'refines' attribute, when using fragment ID, must target an existing ID
+  Scenario: `refines` attribute, when using fragment ID, must target an existing ID
     When checking file 'metadata-refines-unknown-id-error.opf'
     Then error RSC-005 is reported
     And the message contains "@refines missing target id"
     And no other errors or warnings are reported
     
   @spec @xref:attrdef-refines
-  Scenario: 'refines' references cycles are not allowed
+  Scenario: `refines` references cycles are not allowed
     When checking file 'metadata-refines-cycle-error.opf'
     Then error OPF-065 is reported
     And no other errors or warnings are reported
@@ -88,18 +88,18 @@ Feature: EPUB 3 — Package document
   ### 5.3.7 The xml:lang attribute
   
   @spec @xref:attrdef-xml-lang
-  Scenario: the 'xml:lang' attribute can be empty
+  Scenario: The `xml:lang` attribute can be empty
     When checking file 'attr-lang-empty-valid.opf'
     Then no other errors or warnings are reported
 
   @spec @xref:attrdef-xml-lang
-  Scenario: the 'xml:lang' language tag must not have leading/trailing whitespace   
+  Scenario: The `xml:lang` language tag must not have leading/trailing whitespace   
     When checking file 'attr-lang-whitespace-error.opf'
     Then error OPF-092 is reported
     And no other errors or warnings are reported
 
   @spec @xref:attrdef-xml-lang
-  Scenario: the 'xml:lang' language tag must be well-formed   
+  Scenario: The `xml:lang` language tag must be well-formed   
     When checking file 'attr-lang-not-well-formed-error.opf'
     Then error OPF-092 is reported
     And no other errors or warnings are reported
@@ -113,21 +113,21 @@ Feature: EPUB 3 — Package document
   ## 5.4 The package element
 
   @spec @xref:sec-package-elem
-  Scenario: the 'package' 'unique-identifier' attribute must be a known ID
+  Scenario: The `package unique-identifier` attribute must be a known ID
     When checking file 'package-unique-identifier-unknown-error.opf'
     Then error RSC-005 is reported
     And the message contains "does not resolve to a dc:identifier element"
     And no other errors or warnings are reported 
     
   @spec @xref:sec-package-elem
-  Scenario: the 'package' 'unique-identifier' attribute must point to a 'dc:identifier' element
+  Scenario: The `package unique-identifier` attribute must point to a `dc:identifier` element
     When checking file 'package-unique-identifier-not-targeting-identifier-error.opf'
     Then error RSC-005 is reported
     And the message contains "does not resolve to a dc:identifier element"
     And no other errors or warnings are reported 
   
   @spec @xref:sec-package-elem
-  Scenario: the 'package' element must have a 'metadata' child element  
+  Scenario: The `package` element must have a `metadata` child element  
     When checking file 'package-no-metadata-element-error.opf'
     Then error RSC-005 is reported (missing metadata element)
     And the message contains 'missing required element "metadata"'
@@ -135,7 +135,7 @@ Feature: EPUB 3 — Package document
     And no other errors or warnings are reported
     
   @spec @xref:sec-package-elem
-  Scenario: the 'package' element's 'metadata' child must be before the 'manifest' child  
+  Scenario: The `package` element's `metadata` child must be before the `manifest` child  
     When checking file 'package-manifest-before-metadata-error.opf'
     Then error RSC-005 is reported
     And the message contains 'element "manifest" not allowed yet'
@@ -152,7 +152,7 @@ Feature: EPUB 3 — Package document
   ### 5.5.2 Metadata values
   
   @spec @xref:sec-metadata-values
-  Scenario: the unique identifier must not be empty
+  Scenario: The unique identifier must not be empty
     When checking EPUB 'package-unique-identifier-attribute-missing-error.opf'
     # FIXME OPF-048 could be removed, as it is already reported as RSC-005
     Then the following errors are reported
@@ -161,28 +161,28 @@ Feature: EPUB 3 — Package document
     And no other errors or warnings are reported
     
   @spec @xref:sec-metadata-values
-  Scenario: 'dc:identifier' must not be empty 
+  Scenario: `dc:identifier` must not be empty 
     When checking file 'metadata-identifier-empty-error.opf'
     Then error RSC-005 is reported
     And the message contains "must be a string with length at least 1" 
     And no other errors or warnings are reported
 
   @spec @xref:sec-metadata-values
-  Scenario: 'dc:language' must not be empty  
+  Scenario: `dc:language` must not be empty  
     When checking file 'metadata-language-empty-error.opf'
     Then error RSC-005 is reported
     And the message contains "must be a string with length at least 1"
     And no other errors or warnings are reported
 
   @spec @xref:sec-metadata-values
-  Scenario: 'dc:title' must not be empty 
+  Scenario: `dc:title` must not be empty 
     When checking file 'metadata-title-empty-error.opf'
     Then error RSC-005 is reported
     And the message contains "must be a string with length at least 1" 
     And no other errors or warnings are reported
     
   @spec @xref:sec-metadata-values
-  Scenario: a metadata's value must be defined 
+  Scenario: A metadata's value must be defined 
     When checking file 'metadata-meta-value-empty-error.opf'
     Then error RSC-005 is reported
     And the message contains "must be a string with length at least 1" 
@@ -193,7 +193,7 @@ Feature: EPUB 3 — Package document
     
   #### 5.5.3.1 The dc:identifier element
   
-  Scenario: 'dc:identifier' starting with "urn:uuid:" should be a valid UUID  
+  Scenario: `dc:identifier` starting with `urn:uuid:` should be a valid UUID  
     When checking file 'metadata-identifier-uuid-invalid-warning.opf'
     Then warning OPF-085 is reported
     And no other errors or warnings are reported
@@ -202,7 +202,7 @@ Feature: EPUB 3 — Package document
   #### 5.5.3.2 The dc:title element
   
   @spec @xref:sec-opf-dctitle
-  Scenario: 'dc:title' must be specified
+  Scenario: `dc:title` must be specified
     When checking file 'metadata-title-missing-error.opf'
     Then error RSC-005 is reported
     And the message contains 'missing required element "dc:title"' 
@@ -212,7 +212,7 @@ Feature: EPUB 3 — Package document
   #### 5.5.3.3 The dc:language element
   
   @spec @xref:sec-opf-dclanguage
-  Scenario: 'dc:language' must be well-formed  
+  Scenario: `dc:language` must be well-formed  
     When checking file 'metadata-language-not-well-formed-error.opf'
     Then error OPF-092 is reported
     And no other errors or warnings are reported
@@ -222,7 +222,7 @@ Feature: EPUB 3 — Package document
 
   #### 5.5.4.1 General definition
   
-  Scenario: 'dc:source' valid values are allowed 
+  Scenario: `dc:source` valid values are allowed 
     When checking file 'metadata-source-valid.opf'
     Then no errors or warnings are reported
 
@@ -230,31 +230,31 @@ Feature: EPUB 3 — Package document
   #### 5.5.4.4 The dc:date element
   
   @spec @xref:sec-opf-dcdate
-  Scenario: Multiple 'dc:date' elements specified
+  Scenario: Multiple `dc:date` elements specified
     When checking file 'metadata-date-multiple-error.opf'
     Then error RSC-005 is reported
     And the message contains 'element "dc:date" not allowed here' 
     And no errors or warnings are reported
 
-  Scenario: 'dc:date' can be specified as an ISO 8601:2004 value 
+  Scenario: `dc:date` can be specified as an ISO 8601:2004 value 
     When checking file 'metadata-date-single-year-valid.opf'
     Then no errors or warnings are reported
 
-  Scenario: 'dc:date' can be specified as a single year 
+  Scenario: `dc:date` can be specified as a single year 
     When checking file 'metadata-date-single-year-valid.opf'
     Then no errors or warnings are reported
     
-  Scenario: 'dc:date' value can have leading/trailng whitespace 
+  Scenario: `dc:date` value can have leading/trailng whitespace 
     When checking file 'metadata-date-with-whitespace-valid.opf'
     Then no errors or warnings are reported
     
-  Scenario: 'dc:date' with an invalid ISO 8601:2004 syntax is reported
+  Scenario: `dc:date` with an invalid ISO 8601:2004 syntax is reported
     When checking file 'metadata-date-iso-syntax-error-warning.opf'
     Then warning OPF-053 is reported
     And the message contains "does not follow recommended syntax"
     And no errors or warnings are reported
 
-  Scenario: 'dc:date' with an unknown format is reported
+  Scenario: `dc:date` with an unknown format is reported
     When checking file 'metadata-date-unknown-format-warning.opf'
     Then warning OPF-053 is reported
     And the message contains "does not follow recommended syntax"
@@ -263,7 +263,7 @@ Feature: EPUB 3 — Package document
 
   #### 5.5.4.6 The dc:type element
   
-  Scenario: 'dc:type' valid values are allowed 
+  Scenario: `dc:type` valid values are allowed 
     When checking file 'metadata-type-valid.opf'
     Then no errors or warnings are reported
 
@@ -271,14 +271,14 @@ Feature: EPUB 3 — Package document
   ### 5.5.5 The meta element
   
   @spec @xref:sec-meta-elem
-  Scenario: a metadata's property name must be defined 
+  Scenario: A metadata's property name must be defined 
     When checking file 'metadata-meta-property-empty-error.opf'
     Then error RSC-005 is reported 2 times
     And the message contains 'value of attribute "property" is invalid' 
     And no other errors or warnings are reported
     
   @spec @xref:sec-meta-elem
-  Scenario: a metadata's property name must not be a list of values 
+  Scenario: A metadata's property name must not be a list of values 
     When checking file 'metadata-meta-property-list-error.opf'
     Then error RSC-005 is reported (value is not an NMTOKEN)
     Then error OPF-025 is reported
@@ -286,24 +286,24 @@ Feature: EPUB 3 — Package document
     And no other errors or warnings are reported
 
   @spec @xref:sec-meta-elem
-  Scenario: a metadata's property name must be well-formed
+  Scenario: A metadata's property name must be well-formed
     When checking file 'metadata-meta-property-malformed-error.opf'
     Then error OPF-026 is reported
     And no other errors or warnings are reported
 
-  Scenario: 'scheme' can be used to identify the value system
+  Scenario: `scheme` can be used to identify the value system
     When checking file 'metadata-meta-scheme-valid.opf'
     Then no errors or warnings are reported
     
   @spec @xref:sec-meta-elem
-  Scenario: 'scheme' must not be list of values
+  Scenario: `scheme` must not be list of values
     When checking file 'metadata-meta-scheme-list-error.opf'
     Then error RSC-005 is reported (value is not an NMTOKEN)
     And error OPF-025 is reported
     And no other errors or warnings are reported
     
   @spec @xref:sec-meta-elem
-  Scenario: 'scheme' must not be an unknown value with no prefix
+  Scenario: `scheme` must not be an unknown value with no prefix
     When checking file 'metadata-meta-scheme-unknown-error.opf'
     Then error OPF-027 is reported
     And no other errors or warnings are reported
@@ -312,14 +312,14 @@ Feature: EPUB 3 — Package document
   ### 5.5.6 Last modified date
 
   @spec @xref:sec-metadata-last-modified
-  Scenario: 'dc:modified' must be defined 
+  Scenario: `dc:modified` must be defined 
     When checking file 'metadata-modified-missing-error.opf'
     Then error RSC-005 is reported
     And the message contains "dcterms:modified"
     And no other errors or warnings are reported
 
   @spec @xref:sec-metadata-last-modified
-  Scenario: 'dc:modified' must be of the form 'CCYY-MM-DDThh:mm:ssZ' 
+  Scenario: `dc:modified` must be of the form 'CCYY-MM-DDThh:mm:ssZ' 
     When checking file 'metadata-modified-syntax-error.opf'
     Then error RSC-005 is reported
     And the message contains "CCYY-MM-DDThh:mm:ssZ"
@@ -342,40 +342,40 @@ Feature: EPUB 3 — Package document
     Then no other errors or warnings are reported
 
   @spec @xref:sec-link-elem
-  Scenario: the link 'rel' attribute can have multiple properties
+  Scenario: The `link rel` attribute can have multiple properties
     When checking file 'link-rel-multiple-properties-valid.opf'
     Then no errors or warnings are reported
 
   @spec @xref:sec-link-elem
-  Scenario: the link 'properties' attribute must not be empty
+  Scenario: The `link properties` attribute must not be empty
     When checking file 'link-rel-record-properties-empty-error.opf'
     Then error RSC-005 is reported
     And the message contains 'value of attribute "properties" is invalid'
     And no other errors or warnings are reported
 
   @spec @xref:sec-link-elem
-  Scenario: a link with an unknown 'properties' value is reported
+  Scenario: A `link` with an unknown `properties` value is reported
     When checking file 'link-rel-record-properties-undefined-error.opf'
     Then error OPF-027 is reported
     And no other errors or warnings are reported
     
-  Scenario: the 'link' element can have an 'hreflang' attribute
+  Scenario: The `link` element can have an `hreflang` attribute
     When checking file 'link-hreflang-valid.opf'
     Then no other errors or warnings are reported
 
   @spec @xref:sec-link-elem
-  Scenario: the 'link' 'hreflang' attribute can be empty
+  Scenario: The `link hreflang` attribute can be empty
     When checking file 'link-hreflang-empty-valid.opf'
     Then no other errors or warnings are reported
 
   @spec @xref:sec-link-elem
-  Scenario: the 'link' 'hreflang' language tag must not have leading/trailing whitespace   
+  Scenario: The `link hreflang` language tag must not have leading/trailing whitespace   
     When checking file 'link-hreflang-whitespace-error.opf'
     Then error OPF-092 is reported
     And no other errors or warnings are reported
 
   @spec @xref:sec-link-elem
-  Scenario: the 'link' 'hreflang' language tag must be well-formed   
+  Scenario: The `link hreflang` language tag must be well-formed   
     When checking file 'link-hreflang-not-well-formed-error.opf'
     Then error OPF-092 is reported
     And no other errors or warnings are reported
@@ -414,31 +414,31 @@ Feature: EPUB 3 — Package document
   ### 5.6.2 The item element
   
   @spec @xref:sec-item-elem
-  Scenario: a manifest item must declare a media type  
+  Scenario: A manifest item must declare a media type  
     When checking file 'item-media-type-missing-error.opf'
     Then error RSC-005 is reported
     And the message contains 'missing required attribute "media-type"'
     And no other errors or warnings are reported
 
-  Scenario: item URLs should not contain spaces, even if properly encoded
+  Scenario: `item` URLs should not contain spaces, even if properly encoded
     When checking file 'item-href-contains-spaces-unencoded-error.opf'
     Then error RSC-020 is reported
     And warning PKG-010 is reported (side effect of spaces)
     And no other errors or warnings are reported
 
-  Scenario: item URLs should not contain spaces, even if properly encoded
+  Scenario: `item` URLs should not contain spaces, even if properly encoded
     When checking file 'item-href-contains-spaces-warning.opf'
     Then warning PKG-010 is reported
     And no other errors or warnings are reported
 
   @spec @xref:sec-item-elem
-  Scenario: item URLs must not have a fragment identifier
+  Scenario: `item` URLs must not have a fragment identifier
     When checking file 'item-href-with-fragment-error.opf'
     Then error OPF-091 is reported
     And no other errors or warnings are reported
 
   @spec @xref:sec-item-elem
-  Scenario: two manifest items cannot represent the same resource 
+  Scenario: Two manifest items cannot represent the same resource 
     When checking file 'item-duplicate-resource-error.opf'
     Then error OPF-074 is reported
     And no other errors or warnings are reported
@@ -469,14 +469,14 @@ Feature: EPUB 3 — Package document
     And no other errors or warnings are reported
   
   @spec @xref:sec-item-elem
-  Scenario: fallback attribute must point to an existing item ID 
+  Scenario: Fallback attribute must point to an existing `item` ID 
     When checking file 'fallback-to-unknown-id-error.opf'
     Then error RSC-005 is reported
     And the message contains 'must resolve to another manifest item'
     And no other errors or warnings are reported
     
   @spec @xref:sec-item-elem
-  Scenario: fallback attribute must not reference its item ID 
+  Scenario: Fallback attribute must not reference its `item` ID 
     When checking file 'fallback-to-self-error.opf'
     Then error RSC-005 is reported
     And the message contains 'must resolve to another manifest item'
@@ -490,7 +490,7 @@ Feature: EPUB 3 — Package document
     And error MED-003 is reported
     And no other errors or warnings are reported
     
-  Scenario: Report usage of the EPUB 2 'fallback-style' attribute
+  Scenario: Report usage of the EPUB 2 `fallback-style` attribute
     When checking file 'fallback-style-error.opf'
     Then error RSC-005 is reported
     And the message contains 'fallback-style'
@@ -500,7 +500,7 @@ Feature: EPUB 3 — Package document
   #### 5.6.2.1 Resource properties
   
   @spec @xref:sec-item-resource-properties
-  Scenario: An unknown item property in the default vocab is reported
+  Scenario: An unknown `item` property in the default vocab is reported
     When checking file 'item-property-unknown-error.opf'
     Then error OPF-027 is reported
     And no errors or warnings are reported
@@ -508,20 +508,20 @@ Feature: EPUB 3 — Package document
   ##### cover-image
   
   @spec @xref:sec-item-resource-properties
-  Scenario: The 'cover-image' item property must occur at most once 
+  Scenario: The `cover-image item` property must occur at most once 
     When checking file 'item-property-cover-image-multiple-error.opf'
     Then error RSC-005 is reported
     And the message contains "cover-image"
     And no other errors or warnings are reported
 
   @spec @xref:sec-item-resource-properties
-  Scenario: The 'cover-image' item property must only be used on images 
+  Scenario: The `cover-image item` property must only be used on images 
     When checking file 'item-property-cover-image-wrongtype-error.opf'
     Then error OPF-012 is reported
     And no other errors or warnings are reported
   
   @spec @xref:sec-item-resource-properties
-  Scenario: Report an unknown manifest item property
+  Scenario: Report an unknown manifest `item` property
     When checking EPUB 'package-manifest-prop-unknown-error'
     Then error OPF-027 is reported
     And no other errors or warnings are reported
@@ -572,7 +572,7 @@ Feature: EPUB 3 — Package document
     And no other errors or warnings are reported
 
   @spec @xref:sec-item-resource-properties
-  Scenario: Report the incorrect use of the `remote-resources` property for a resource defined in an `object` `param` element (issue 249)
+  Scenario: Report the incorrect use of the `remote-resources` property for a resource defined in an `object param` element (issue 249)
     When checking EPUB 'package-manifest-prop-remote-resource-object-param-warning'
     Then warning OPF-018 is reported
     And no other errors or warnings are reported
@@ -637,21 +637,21 @@ Feature: EPUB 3 — Package document
   ##### nav
 
   @spec @xref:sec-item-resource-properties
-  Scenario: one item must have the 'nav' property  
+  Scenario: One item must have the `nav` property  
     When checking file 'item-nav-missing-error.opf'
     Then error RSC-005 is reported
     And the message contains 'Exactly one manifest item must declare the "nav" property'
     And no other errors or warnings are reported
     
   @spec @xref:sec-item-resource-properties
-  Scenario: at most one item must have the 'nav' property  
+  Scenario: At most one item must have the `nav` property  
     When checking file 'item-nav-multiple-error.opf'
     Then error RSC-005 is reported
     And the message contains 'Exactly one manifest item must declare the "nav" property'
     And no other errors or warnings are reported
     
   @spec @xref:sec-item-resource-properties
-  Scenario: the 'nav' property must be on an XHTML Content Document  
+  Scenario: The `nav` property must be on an XHTML content document  
     When checking file 'item-nav-not-xhtml-error.opf'
     Then error RSC-005 is reported
     And the message contains 'the Navigation Document must be of the "application/xhtml+xml" type'
@@ -663,7 +663,7 @@ Feature: EPUB 3 — Package document
 
   #### 5.6.3 The bindings Element
   
-  Scenario: Report usage of the 'bindings' element as deprecated 
+  Scenario: Report usage of the `bindings` element as deprecated 
     When checking file 'bindings-deprecated-warning.opf'
     Then warning RSC-017 is reported
     And no other errors or warnings are reported
@@ -674,19 +674,19 @@ Feature: EPUB 3 — Package document
     And error OPF-008 is reported (to report handler for an image)
     And no other errors or warnings are reported
 
-  Scenario: Report a bindings handler that is not an XHTML Content Document
+  Scenario: Report a `bindings` handler that is not an XHTML content document
     When checking file 'bindings-handler-not-xhtml-error.opf'
     Then warning RSC-017 is reported (since bindings is deprecated)
     And error RSC-005 is reported (to report the non-XHTML handler)
     And no other errors or warnings are reported
 
-  Scenario: Report a bindings handler for a type that already has a handler
+  Scenario: Report a `bindings` handler for a type that already has a handler
     When checking file 'package-bindings-handler-duplicate-error'
     Then warning RSC-017 is reported (since bindings is deprecated)
     And error OPF-009 is reported (to report the duplicate handler)
     And no other errors or warnings are reported
 
-  Scenario: Report a bindings handler that is not a scripted document
+  Scenario: Report a `bindings` handler that is not a scripted document
     When checking file 'package-bindings-handler-not-scripted-error'
     Then warning RSC-017 is reported (since bindings is deprecated)
     And error OPF-046 is reported (to report the duplicate handler)
@@ -709,19 +709,19 @@ Feature: EPUB 3 — Package document
   #### 5.7.2 The itemref element
   
   @spec @xref:sec-itemref-elem
-  Scenario: An SVG Content Document is allowed in the spine 
+  Scenario: An SVG content document is allowed in the spine 
     When checking file 'spine-item-svg-valid.opf'
     Then no errors or warnings are reported
     
   @spec @xref:sec-itemref-elem
-  Scenario: An unknown 'itemref' ID is reported  
+  Scenario: An unknown `itemref` ID is reported  
     When checking file 'spine-item-unknown-error.opf'
     Then error OPF-049 is reported (ID not found)
     Then error RSC-005 is reported (schema error)
     And no other errors or warnings are reported
 
   @spec @xref:sec-itemref-elem
-  Scenario: Two spine 'itemref' elements cannot reference the same manifest item  
+  Scenario: Two spine `itemref` elements cannot reference the same manifest item  
     When checking file 'spine-item-duplicate-error.opf'
     Then error RSC-005 is reported
     And the message contains "Itemref refers to the same manifest entry as a previous itemref"
@@ -733,18 +733,18 @@ Feature: EPUB 3 — Package document
   ### 5.8.1 The collection element
 
   @spec @xref:sec-collection-elem
-  Scenario: a collection role can be an absolute URL
+  Scenario: A `collection role` can be an absolute URL
     When checking file 'collection-role-url-valid.opf'
     Then no errors or warnings are reported
 
   @spec @xref:sec-collection-elem
-  Scenario: a collection role must not be an invalid URL
+  Scenario: A `collection role` must not be an invalid URL
     Spec mismatch: this should be reported as an error 
     When checking file 'collection-role-url-invalid-error.opf'
     Then warning OPF-070 is reported
     And no other errors or warnings are reported
 
-  Scenario: a 'manifest' collection must be the child of another collection
+  Scenario: A `manifest collection` must be the child of another collection
     See http://idpf.org/epub/vocab/package/roles/manifest/
     When checking file 'collection-role-manifest-toplevel-error.opf'
     Then error RSC-005 is reported
@@ -757,7 +757,7 @@ Feature: EPUB 3 — Package document
   
   #### 5.9.2 The guide element
 
-  Scenario: 'guide' should not contain two entries of the same type pointing to the same resource
+  Scenario: `guide` should not contain two entries of the same type pointing to the same resource
     When checking EPUB 'legacy-guide-duplicates-warning.opf'
     Then warning RSC-017 is reported 2 times (once for each entry)
     And the message contains 'Duplicate "reference" elements with the same "type" and "href" attributes'
@@ -765,13 +765,13 @@ Feature: EPUB 3 — Package document
     
   #### 5.9.3 NCX
 
-  Scenario: When an NCX document is present, it must be identified in the 'toc' attribute of the spine  
+  Scenario: When an NCX document is present, it must be identified in the `toc` attribute of the spine  
     When checking file 'legacy-ncx-toc-attribute-missing-error.opf'
     Then error RSC-005 is reported
     And the message contains "toc attribute must be set"
     And no other errors or warnings are reported
     
-  Scenario: The 'toc' attribute of the spine must point to an NCX document  
+  Scenario: The `toc` attribute of the spine must point to an NCX document  
     When checking file 'legacy-ncx-toc-attribute-not-ncx-error.opf'
     Then error OPF-050 is reported
     Then error RSC-005 is reported (duplicate schema error)

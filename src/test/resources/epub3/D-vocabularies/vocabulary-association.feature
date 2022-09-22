@@ -15,18 +15,18 @@ Feature: EPUB 3 — Vocabularies — Vocabulary association
   ## D.1.4 The prefix attribute
   
   @spec @xref:sec-prefix-attr
-  Scenario: the 'prefix' attribute can be used to define new prefix mappings 
+  Scenario: The `prefix` attribute can be used to define new prefix mappings 
     When checking file 'property-prefix-declaration-valid.opf'
     Then no errors or warnings are reported
 
   @spec @xref:sec-prefix-attr
-  Scenario: syntax errors in the 'prefix' attribute are reported
+  Scenario: Syntax errors in the `prefix` attribute are reported
     When checking file 'property-prefix-declaration-syntax-error.opf'
     Then error OPF-004c is reported 2 times (the test file contains 2 syntax errors)
     And no other errors or warnings are reported
 
   @spec @xref:sec-prefix-attr
-  Scenario: default vocabularies must not be assigned a prefix
+  Scenario: Default vocabularies must not be assigned a prefix
   	Note: This should be an error, but is currently reported as a warning
   	See issue 522: https://github.com/w3c/epubcheck/issues/522
     When checking file 'property-prefix-declaration-default-vocabs-error.opf'
@@ -42,15 +42,15 @@ Feature: EPUB 3 — Vocabularies — Vocabulary association
 
   ## D.1.5 Reserved prefixes
   
-  Scenario: reserved prefixes can be explicitly declared
+  Scenario: Reserved prefixes can be explicitly declared
     When checking file 'property-prefix-declaration-reserved-explicit-valid.opf'
     Then no errors or warnings are reported
 
-  Scenario: reserved prefixes should not be overridden to other vocabularies 
+  Scenario: Reserved prefixes should not be overridden to other vocabularies 
     When checking file 'property-prefix-declaration-reserved-overridden-warning.opf'
     Then warning OPF-007 is reported 8 times (once for each reserved prefix)
     And no other errors or warnings are reported
 
-  Scenario: The 'schema' prefix can be used in metadata properties without being declared
+  Scenario: The `schema` prefix can be used in metadata properties without being declared
     When checking file 'property-prefix-schema-not-declared-valid.opf'
     Then no errors or warnings are reported
